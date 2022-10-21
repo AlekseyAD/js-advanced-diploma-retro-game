@@ -4,6 +4,7 @@ import GameState from './GameState';
 import Team from './Team';
 import { generateTeam } from './generators';
 import PositionedCharacter from './PositionedCharacter';
+import cursors from './cursors';
 
 import Bowman from './Characters/Bowman';
 import Swordsman from './Characters/Swordsman';
@@ -35,6 +36,7 @@ export default class GameController {
     this.positionTeam(this.userTeam, this.positionUser());
     this.positionTeam(this.aiTeam, this.positionAi());
 
+    this.gamePlay.addCellClickListener(this.onCellClick.bind(this));
     this.gamePlay.addCellEnterListener(this.onCellEnter.bind(this));
     this.gamePlay.addCellLeaveListener(this.onCellLeave.bind(this));
 
@@ -43,6 +45,14 @@ export default class GameController {
 
   onCellClick(index) {
     // TODO: react to click
+
+    // Если клик на персонажа игрока, то выделяем клетку желтым
+    if (this.getId(index) && this.isUser(index)) {
+      this.gamePlay.cells.forEach((element) => element.classList.remove('selected-green'));
+      this.gamePlay.cells.forEach((element) => element.classList.remove('selected-yellow'));
+      this.gamePlay.selectCell(index);
+      this.gameState.selected = index;
+    }
   }
 
   onCellEnter(index) {
@@ -58,10 +68,16 @@ export default class GameController {
     // TODO: react to mouse leave
   }
 
+  isUser(id) {
+    if (this.getId(id)) {
+      const character = this.getId(id).character;
+      return this.userHeroes.some((element) => character instanceof element);
+    }
+    return false;
+  }
+
   getId(id) {
-    return this.gameState.allCell.find(
-      (element) => element.position === id
-    );
+    return this.gameState.allCell.find((element) => element.position === id);
   }
 
   getRandom(positions) {
