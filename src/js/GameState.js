@@ -1,7 +1,7 @@
 export default class GameState {
   constructor() {
     this.level = 1;
-    this.allPositions = [];
+    this.allCell = [];
   }
 
   static from(object) {

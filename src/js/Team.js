@@ -13,7 +13,7 @@
  * */
 export default class Team {
   // TODO: write your logic here
-  
+
   constructor() {
     this.members = new Set();
   }
@@ -29,10 +29,9 @@ export default class Team {
     this.members = new Set([...this.members, ...characters]);
   }
 
-  
-  * [Symbol.iterator]() {
-  for (const person of this.members) {
-    yield person;
+  *[Symbol.iterator]() {
+    for (const person of this.members) {
+      yield person;
+    }
   }
-}
 }
