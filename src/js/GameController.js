@@ -29,10 +29,13 @@ export default class GameController {
     // TODO: add event listeners to gamePlay events
     // TODO: load saved stated from stateService
     this.gamePlay.drawUi(themes[this.gameState.level]);
-    this.userTeam.addAll(generateTeam(this.userHeroes, 1, 2));
-    this.aiTeam.addAll(generateTeam(this.aiHeroes, 1, 2));
+
+    this.userTeam.addHeroes(generateTeam(this.userHeroes, 1, 2));
+    this.aiTeam.addHeroes(generateTeam(this.aiHeroes, 1, 2));
+    
     this.positionTeam(this.userTeam, this.positionUser());
     this.positionTeam(this.aiTeam, this.positionAi());
+    
     this.gamePlay.redrawPositions(this.gameState.allPositions);
   }
 

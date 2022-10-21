@@ -18,14 +18,14 @@ export default class Team {
     this.members = new Set();
   }
 
-  add(character) {
-    if (this.members.has(character)) {
-      throw new Error('Такой персонаж уже eсть в команде');
-    }
-    this.members.add(character);
-  }
+  // addHero(character) {
+  //   if (this.members.has(character)) {
+  //     throw new Error('Такой персонаж уже eсть в команде');
+  //   }
+  //   this.members.add(character);
+  // }
 
-  addAll(characters) {
+  addHeroes(characters) {
     this.members = new Set([...this.members, ...characters]);
   }
 
